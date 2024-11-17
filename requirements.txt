@@ -1,0 +1,9 @@
+# Web utilities
+Django==5.1.2
+
+# linters
+pylint==3.3.1
+black==24.10.0
+
+# tests
+coverage==7.6.4

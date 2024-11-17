@@ -1,3 +1,9 @@
-from django.shortcuts import render
+"""Module gathering views for viewer app."""
 
-# Create your views here.
+# from django.shortcuts import render
+from django.http import HttpResponse, HttpRequest
+
+
+def index(request: HttpRequest) -> HttpResponse:
+    """Index page of viewer."""
+    return HttpResponse("Welcome to cryptomat's viewer!")
