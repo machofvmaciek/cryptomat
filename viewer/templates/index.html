@@ -1,11 +1,101 @@
 {% extends "base_generic.html" %}
 
+{% block style %}
+    {% comment %} <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style> {% endcomment %}
+
+    <style>
+        .grid-table {
+            display: grid;
+            grid-template-columns: 50px 1fr 1fr 1fr 1fr;
+            max-width: 75%;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .grid-row {
+            display: contents; /* Treat children as grid items */
+        }
+        .grid-header, .grid-cell {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .grid-header {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+        .grid-header:first-child, .grid-cell:first-child {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <h1>cryptomat, (not)®</h1>
     <p>
         Welcome to cryptomat,
         <em>your cryptocurrencies assistant!</em>
     </p>
+    <div style="margin-left:20px;margin-top:40px">
+        <h4>Top coins:</h4>
+        {% comment %} <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Coin Name</th>
+                    <th>Current Price</th>
+                    <th>ATH</th>
+                    <th>24h Change % </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coin in coins_data %}
+                    {% for name, details in coin.items %}
+                        <tr>
+                            <td>{{ forloop.parentloop.counter }}</td>
+                            <td>{{ name }}</td>
+                            <td>${{ details.current_price }}</td>
+                            <td>{{ details.ath }}</td>
+                            <td>{{ details.change_24 }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table> {% endcomment %}
+        <div class="grid-table">
+            <!-- Header Row -->
+            <div class="grid-header">#</div>
+            <div class="grid-header">Coin Name</div>
+            <div class="grid-header">Current Price</div>
+            <div class="grid-header">ATH</div>
+            <div class="grid-header">24h Change</div>
+    
+            <!-- Data Rows -->
+            {% for coin in coins_data %}
+                {% for name, details in coin.items %}
+                    <div class="grid-cell">{{ forloop.parentloop.counter }}</div>
+                    <div class="grid-cell">{{ name }}</div>
+                    <div class="grid-cell">{{ details.current_price|floatformat:2 }}</div>
+                    <div class="grid-cell">{{ details.ath }}</div>
+                    <div class="grid-cell">{{ details.change_24|floatformat:2 }}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 <!-- Override block "title" -->
