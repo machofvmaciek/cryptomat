@@ -1,0 +1,20 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  
+.vt323-regular {
+  font-family: "VT323", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cryptomat-header-text {
+  font-size: 56px;
+}
+
+.line {
+  border-bottom: 7px solid #1e1d1d;
+  /* padding-top: 1em; */
+}
